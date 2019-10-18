@@ -1,43 +1,43 @@
 // node modules
 const express = require('express');
-const app = express();
-const port = 3000;
+const port = 4000;
 const logger = require('morgan');
-const graphqlHTTP = require('express-graphql');
-const { buildSchema } = require('graphql');
-const root = require('./routes/graphql');
-// uses
+const { ApolloServer } = require('apollo-server-express');
+const chalk = require('chalk');
+const path = '/api/graphql';
+
+// app
+const app = express();
+
 app.use(logger('dev'));
-app.use(express.json());
-
-// graphql
-const schema = buildSchema(`
-  type Query {
-    hello (
-      name: String
-    ): String
-  }
-`);
-
-
-app.use('/api/graphql', graphqlHTTP({
-  schema: schema,
-  rootValue: root,
-  graphiql: true,
-}));
+app.get('*', (req, res) => res.send('LSP API welcomes you'));
 
 // sequelize
 const models = require('./models');
-models.sequelize
-  .sync()
-  .then(() => console.log('Database looks fine'))
+const { getUser } = require('./modules/helpers');
+
+models.sequelize.authenticate();
+models.sequelize.sync()
+  .then(() => {
+    console.log(' 🚀🚀🚀 🚀🚀🚀 🚀🚀🚀\n', chalk.green('🚀 Database looks fine'));
+
+    const resolvers = require('./modules/resolvers');
+    const typeDefs = require('./modules/typedefs');
+    const server = new ApolloServer({
+      typeDefs,
+      resolvers,
+      context: async({ req, res }) => {
+        const user = await getUser(models, req);
+        return { models, user, res, req, };
+      }
+    });
+
+    server.applyMiddleware({ app, path });
+    app.listen(port);
+
+    console.log(
+      chalk.green(` 🚀 Server started at http://localhost:${port}${server.graphqlPath}\n`),
+      '🚀🚀🚀 🚀🚀🚀 🚀🚀🚀',
+    );
+  })
   .catch((error) => console.log(error));
-
-// routes
-require('./routes')(app);
-app.get('*', (req, res) => res.send('LSP API welcomes you'));
-
-// server
-app.listen(port, () => {
-  console.log(`Example app listening on port ${port}!`)
-});
