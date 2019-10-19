@@ -67,6 +67,9 @@ module.exports = (sequelize, DataTypes) => {
     Char.hasMany(models.Vehicle, {
       foreignKey: 'ownerid',
     });
+    Char.hasOne(models.Bankcard, {
+      foreignKey: 'ownerid',
+    });
   };
   return Char;
 };
