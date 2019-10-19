@@ -60,7 +60,10 @@ module.exports = (sequelize, DataTypes) => {
     Char.belongsTo(models.Account, {
       foreignKey: 'account',
       onDelete: 'CASCADE',
-    })
+    });
+    Char.hasOne(models.Activeslot, {
+      foreignKey: 'user',
+    });
   };
   return Char;
 };

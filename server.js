@@ -9,7 +9,7 @@ const path = '/api/graphql';
 // app
 const app = express();
 
-app.use(logger('dev'));
+// app.use(logger('dev'));
 app.get('*', (req, res) => res.send('LSP API welcomes you'));
 
 // sequelize
@@ -27,8 +27,8 @@ models.sequelize.sync()
       typeDefs,
       resolvers,
       context: async({ req, res }) => {
-        const user = await getUser(models, req);
-        return { models, user, res, req, };
+        const user = await getUser(models, req, res);
+        return { models, user, res, req };
       }
     });
 

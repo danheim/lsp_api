@@ -11,13 +11,14 @@ module.exports = {
       return models.Char.findByPk(id);
     },
     signIn: async(root, { name, password }, { models, res }) => {
-      const account = await models.Account.findOne({
-        where: { name, password: md5(password) }
-      });
+      const where = { name, password: md5(password) };
+      const account = await models.Account.findOne({ where });
+      if (!account) return null;
+
       const token = await jwt.sign({ account }, SECRET_KEY);
+      if (!token) return null;
 
       res.set(ACCESS_TOKEN_HEADER, token);
-
       return account;
     }
   },
@@ -25,6 +26,10 @@ module.exports = {
     chars: (parent) => parent.getChars()
   },
   Char: {
-    account: (parent) => parent.getAccount()
-  }
+    account: (parent) => parent.getAccount(),
+    activeslot: (parent) => parent.getActiveslot()
+  },
+  // Activeslot: {
+  //
+  // }
 };

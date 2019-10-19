@@ -22,6 +22,7 @@ module.exports = gql`
 
     type Char {
         account: Account!
+        activeslot: Activeslot
         login: String
         password: String
         loginw: String
@@ -75,5 +76,11 @@ module.exports = gql`
         unixticket: String
         flymode: Int
         pblacklist: String
+    }
+    
+    type Activeslot {
+        user: Int
+        items: String
+        counts: String
     }
 `;
