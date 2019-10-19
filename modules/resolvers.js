@@ -29,6 +29,7 @@ module.exports = {
     account: (parent) => parent.getAccount(),
     activeslot: (parent) => parent.getActiveslot(),
     vehicles: (parent) => parent.getVehicles(),
-    bankcard: (parent) => parent.getBankcard()
+    bankcard: (parent) => parent.getBankcard(),
+    charinv: (parent) => parent.getCharinv()
   },
 };

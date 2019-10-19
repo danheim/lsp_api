@@ -70,6 +70,9 @@ module.exports = (sequelize, DataTypes) => {
     Char.hasOne(models.Bankcard, {
       foreignKey: 'ownerid',
     });
+    Char.hasOne(models.Charinv, {
+      foreignKey: 'user',
+    });
   };
   return Char;
 };

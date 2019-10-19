@@ -9,7 +9,7 @@ const path = '/api/graphql';
 // app
 const app = express();
 
-// app.use(logger('dev'));
+app.use(logger('dev'));
 app.get('*', (req, res) => res.send('LSP API welcomes you'));
 
 // sequelize

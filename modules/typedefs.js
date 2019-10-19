@@ -25,6 +25,7 @@ module.exports = gql`
         activeslot: Activeslot
         vehicles: [Vehicle]
         bankcard: Bankcard
+        charinv: Charinv
         login: String
         password: String
         loginw: String
@@ -118,5 +119,11 @@ module.exports = gql`
         money: Int
         ownerid: Int
         pincode: Int
+    }
+
+    type Charinv {
+        user: Int
+        items: String
+        counts: String
     }
 `;
