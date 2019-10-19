@@ -11,7 +11,7 @@ module.exports = gql`
     }
 
     type Account {
-        chars: [Char!]
+        chars: [Char]
         name: String
         token: String
         password: String
@@ -23,6 +23,7 @@ module.exports = gql`
     type Char {
         account: Account!
         activeslot: Activeslot
+        vehicles: [Vehicle]
         login: String
         password: String
         loginw: String
@@ -82,5 +83,32 @@ module.exports = gql`
         user: Int
         items: String
         counts: String
+    }
+    
+    type Vehicle {
+        model: Int
+        unixcreate: Int
+        mileage: Float
+        damage: String
+        health: Float
+        plate: String
+        ownerid: Int
+        faction: Int
+        cfaction: Int
+        work: Int
+        locked: Int
+        trunklocked: Int
+        color1: Int
+        color2: Int
+        siren: Int
+        fuel: Float
+        x: Float
+        y: Float
+        r: Float
+        z: Float
+        vw: Int
+        interior: Int
+        su: Int
+        sureason: String
     }
 `;

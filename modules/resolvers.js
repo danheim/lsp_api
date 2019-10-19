@@ -27,9 +27,7 @@ module.exports = {
   },
   Char: {
     account: (parent) => parent.getAccount(),
-    activeslot: (parent) => parent.getActiveslot()
+    activeslot: (parent) => parent.getActiveslot(),
+    vehicles: (parent) => parent.getVehicles()
   },
-  // Activeslot: {
-  //
-  // }
 };
