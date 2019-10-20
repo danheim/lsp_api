@@ -12,6 +12,7 @@ const getUser = async (models, req, res) => {
   try {
     data = jwt.verify(token, SECRET_KEY);
   } catch (e) {
+    res.removeHeader(ACCESS_TOKEN_HEADER);
     return null;
   }
 

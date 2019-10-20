@@ -14,6 +14,9 @@ module.exports = (sequelize, DataTypes) => {
     Account.hasMany(models.Char, {
       foreignKey: 'account',
     });
+    Account.hasMany(models.Candidate, {
+      foreignKey: 'account',
+    });
   };
 
   return Account;

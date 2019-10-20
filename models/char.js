@@ -73,6 +73,9 @@ module.exports = (sequelize, DataTypes) => {
     Char.hasOne(models.Charinv, {
       foreignKey: 'user',
     });
+    Char.hasMany(models.Enterlog, {
+      foreignKey: 'user',
+    });
   };
   return Char;
 };

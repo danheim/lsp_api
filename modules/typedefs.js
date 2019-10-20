@@ -12,12 +12,26 @@ module.exports = gql`
 
     type Account {
         chars: [Char]
+        candidates: [Candidate]
         name: String
         token: String
         password: String
         email: String
         datereg: String
         lastseen: String
+    }
+    
+    type Candidate {
+        login: String
+        password: String
+        age: Int
+        skin: Int
+        sex: Int
+        race: Int
+        national: Int
+        summary: String
+        firstsit: String
+        secondsit: String
     }
 
     type Char {
@@ -26,6 +40,7 @@ module.exports = gql`
         vehicles: [Vehicle]
         bankcard: Bankcard
         charinv: Charinv
+        enterlogs: [Enterlog]
         login: String
         password: String
         loginw: String
@@ -125,5 +140,12 @@ module.exports = gql`
         user: Int
         items: String
         counts: String
+    }
+    
+    type Enterlog {
+        user: Int
+        ip: String
+        type: Int
+        date: String
     }
 `;

@@ -23,13 +23,15 @@ module.exports = {
     }
   },
   Account: {
-    chars: (parent) => parent.getChars()
+    chars: (parent) => parent.getChars(),
+    candidates: (parent) => parent.getCandidates(),
   },
   Char: {
     account: (parent) => parent.getAccount(),
     activeslot: (parent) => parent.getActiveslot(),
     vehicles: (parent) => parent.getVehicles(),
     bankcard: (parent) => parent.getBankcard(),
-    charinv: (parent) => parent.getCharinv()
+    charinv: (parent) => parent.getCharinv(),
+    enterlogs: (parent) => parent.getEnterlogs()
   },
 };

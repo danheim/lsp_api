@@ -10,7 +10,7 @@ module.exports = (sequelize, DataTypes) => {
     Charinv.belongsTo(models.Char, {
       foreignKey: 'user',
       onDelete: 'CASCADE'
-    })
+    });
   };
   return Charinv;
 };
