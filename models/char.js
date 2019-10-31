@@ -54,6 +54,10 @@ module.exports = (sequelize, DataTypes) => {
     unixticket: DataTypes.STRING,
     flymode: DataTypes.INTEGER,
     pblacklist: DataTypes.STRING,
+    jailtime: DataTypes.INTEGER,
+    mutetime: DataTypes.INTEGER,
+    ramcount: DataTypes.INTEGER,
+    robcount: DataTypes.INTEGER,
   }, {});
   Char.associate = function(models) {
     // associations can be defined here

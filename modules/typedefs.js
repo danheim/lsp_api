@@ -2,6 +2,7 @@ const { gql } = require('apollo-server-express');
 
 module.exports = gql`
     type Query {
+        authUser: Account
         getAccount(id: ID!): Account
         getChar(id: ID!): Char
         signIn(
@@ -94,6 +95,8 @@ module.exports = gql`
         unixticket: String
         flymode: Int
         pblacklist: String
+        jailtime: Int
+        mutetime: Int
     }
     
     type Activeslot {

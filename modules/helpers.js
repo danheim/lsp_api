@@ -8,21 +8,19 @@ const getUser = async (models, req, res) => {
     return null;
   }
 
-  let data;
+  let account;
   try {
-    data = jwt.verify(token, SECRET_KEY);
+    account = jwt.verify(token, SECRET_KEY).account;
   } catch (e) {
-    res.removeHeader(ACCESS_TOKEN_HEADER);
     return null;
   }
 
-  const user = await models.Account.findByPk(data.account.id);
+  const user = await models.Account.findByPk(account.id);
   if (!user) {
     res.removeHeader(ACCESS_TOKEN_HEADER);
     return null;
   }
-
-  return data.account;
+  return user.dataValues;
 };
 
 module.exports = {
