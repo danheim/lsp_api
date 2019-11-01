@@ -1,7 +1,7 @@
 'use strict';
 module.exports = (sequelize, DataTypes) => {
   const Account = sequelize.define('Account', {
-    name: DataTypes.STRING,
+    login: DataTypes.STRING,
     token: DataTypes.STRING,
     password: DataTypes.STRING,
     email: DataTypes.STRING,

@@ -5,8 +5,11 @@ module.exports = gql`
         authUser: Account
         getAccount(id: ID!): Account
         getChar(id: ID!): Char
+    }
+    
+    type Mutation {
         signIn(
-            name: String!
+            login: String!
             password: String!
         ): Account
     }

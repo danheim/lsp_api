@@ -1,27 +1,23 @@
 const jwt = require('jsonwebtoken');
 const md5 = require('md5');
-const { ACCESS_TOKEN_HEADER, SECRET_KEY } = require('./constants');
+const { SECRET_KEY } = require('./constants');
 
 module.exports = {
   Query: {
-    authUser: async(root, args, { models, user, req, res }) => {
-      return models.Account.findByPk(user.id);
-    },
-    getAccount: async(root, { id }, { models }) => {
-      return models.Account.findByPk(id);
-    },
-    getChar: (root, { id }, { models }) => {
-      return models.Char.findByPk(id);
-    },
-    signIn: async(root, { name, password }, { models, res }) => {
-      const where = { name, password: md5(password) };
+    authUser: (root, args, { models, user }) => models.Account.findByPk(user.id),
+    getChar: (root, { id }, { models }) => models.Char.findByPk(id),
+  },
+  Mutation: {
+    signIn: async(
+      root, { login, password }, { models }
+    ) => {
+      const where = { login, password: md5(password) };
       const account = await models.Account.findOne({ where });
       if (!account) return null;
 
       const token = await jwt.sign({ account }, SECRET_KEY);
       if (!token) return null;
 
-      // res.cookie(ACCESS_TOKEN_HEADER, token);
       account.token = token;
       return account;
     }
