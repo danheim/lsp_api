@@ -15,7 +15,7 @@ module.exports = {
       const account = await models.Account.findOne({ where });
       if (!account) return null;
 
-      const token = await jwt.sign({ account }, SECRET_KEY);
+      const token = await jwt.sign({ account }, SECRET_KEY, { expiresIn: '1h' });
       if (!token) return null;
 
       account.token = token;
