@@ -15,8 +15,10 @@ module.exports = gql`
     }
 
     type Account {
+        id: Int
         chars: [Char]
         candidates: [Candidate]
+        admin: Admin
         login: String
         token: String
         email: String
@@ -25,6 +27,7 @@ module.exports = gql`
     }
     
     type Candidate {
+        id: Int
         login: String
         password: String
         age: Int
@@ -38,12 +41,14 @@ module.exports = gql`
     }
 
     type Char {
+        id: Int
         account: Account!
         activeslot: Activeslot
         vehicles: [Vehicle]
         bankcard: Bankcard
         charinv: Charinv
         enterlogs: [Enterlog]
+        warns: [Warn]
         login: String
         password: String
         loginw: String
@@ -102,12 +107,14 @@ module.exports = gql`
     }
     
     type Activeslot {
+        id: Int
         user: Int
         items: String
         counts: String
     }
     
     type Vehicle {
+        id: Int
         model: Int
         unixcreate: Int
         mileage: Float
@@ -135,6 +142,7 @@ module.exports = gql`
     }
     
     type Bankcard {
+        id: Int
         cardnumber: Int
         money: Int
         ownerid: Int
@@ -142,15 +150,34 @@ module.exports = gql`
     }
 
     type Charinv {
+        id: Int
         user: Int
         items: String
         counts: String
     }
     
     type Enterlog {
+        id: Int
         user: Int
         ip: String
         type: Int
         date: String
+    }
+
+    type Admin {
+        id: Int
+        account: Int
+        pass: String
+        rank: Int
+        rname: String
+        lastip: String
+    }
+    
+    type Warn {
+        id: Int
+        character: Int
+        admin: Int
+        reason: String
+        status: Int
     }
 `;

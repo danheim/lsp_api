@@ -25,6 +25,7 @@ module.exports = {
   Account: {
     chars: (parent) => parent.getChars(),
     candidates: (parent) => parent.getCandidates(),
+    admin: (parent) => parent.getAdmin(),
   },
   Char: {
     account: (parent) => parent.getAccount(),
@@ -32,6 +33,7 @@ module.exports = {
     vehicles: (parent) => parent.getVehicles(),
     bankcard: (parent) => parent.getBankcard(),
     charinv: (parent) => parent.getCharinv(),
-    enterlogs: (parent) => parent.getEnterlogs()
+    enterlogs: (parent) => parent.getEnterlogs(),
+    warns: (parent) => parent.getWarns()
   },
 };

@@ -80,6 +80,9 @@ module.exports = (sequelize, DataTypes) => {
     Char.hasMany(models.Enterlog, {
       foreignKey: 'user',
     });
+    Char.hasMany(models.Warn, {
+      foreignKey: 'character',
+    });
   };
   return Char;
 };

@@ -16,6 +16,9 @@ module.exports = (sequelize, DataTypes) => {
     Account.hasMany(models.Candidate, {
       foreignKey: 'account',
     });
+    Account.hasOne(models.Admin, {
+      foreignKey: 'account',
+    });
   };
 
   return Account;
