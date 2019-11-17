@@ -50,7 +50,7 @@ module.exports = gql`
         enterlogs: [Enterlog]
         warns: [Warn]
         login: String
-        password: String
+#        password: String
         loginw: String
         premium: Int
         premiumunix: Int
