@@ -14,7 +14,9 @@ const app = express();
 
 app.use(cookieParser());
 app.use(logger('dev'));
-app.get('*', (req, res) => res.send('LSP API welcomes you'));
+app.get('*', (req, res) => res.send({
+  message: 'LS Project API welcomes you :)'
+}));
 
 const corsOptions = {
   origin: 'http://localhost:3000',
