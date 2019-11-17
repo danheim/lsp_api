@@ -3,7 +3,7 @@ const express = require('express');
 const logger = require('morgan');
 const cookieParser = require('cookie-parser');
 const chalk = require('chalk');
-const port = 4000;
+const port = process.env.PORT || 4000;
 
 // apollo
 const { ApolloServer } = require('apollo-server-express');
