@@ -34,6 +34,6 @@ module.exports = {
     bankcard: (parent) => parent.getBankcard(),
     charinv: (parent) => parent.getCharinv(),
     enterlogs: (parent) => parent.getEnterlogs(),
-    warns: (parent) => parent.getWarns()
+    warns: (parent) => parent.getWarns(),
   },
 };
