@@ -6,11 +6,14 @@ module.exports = {
   Query: {
     authUser: (root, args, { models, user }) => models.Account.findByPk(user.id),
     getChar: (root, { id }, { models }) => models.Char.findByPk(id),
+    getQuestions: async (root, args, { models }) => {
+      const questions = await models.Question.findAll();
+      return questions.sort(() => Math.random() - 0.5).slice(0, 12);
+    },
   },
   Mutation: {
-    signIn: async(
-      root, { login, password }, { models }
-    ) => {
+    signIn: async(root, args, { models }) => {
+      const { login, password } = args;
       const where = { login, password: md5(password) };
       const account = await models.Account.findOne({ where });
       if (!account) return null;
@@ -36,4 +39,7 @@ module.exports = {
     enterlogs: (parent) => parent.getEnterlogs(),
     warns: (parent) => parent.getWarns(),
   },
+  Question: {
+    answers: (parent) => parent.getAnswers(),
+  }
 };
