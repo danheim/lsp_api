@@ -1,6 +1,8 @@
 const jwt = require('jsonwebtoken');
 const md5 = require('md5');
-const { SECRET_KEY } = require('./constants');
+const { UserInputError } = require('apollo-server');
+
+const { SECRET_KEY, LOGIN_EXIST, EMAIL_EXIST } = require('./constants');
 
 module.exports = {
   Query: {
@@ -8,15 +10,49 @@ module.exports = {
     getChar: (root, { id }, { models }) => models.Char.findByPk(id),
     getQuestions: async (root, args, { models }) => {
       const questions = await models.Question.findAll();
-      return questions.sort(() => Math.random() - 0.5).slice(0, 12);
+      return questions.sort(() => Math.random() - 0.5);
     },
   },
   Mutation: {
-    signIn: async(root, args, { models }) => {
+    signIn: async (root, args, { models }) => {
       const { login, password } = args;
       const where = { login, password: md5(password) };
       const account = await models.Account.findOne({ where });
       if (!account) return null;
+
+      const token = await jwt.sign({ account }, SECRET_KEY, { expiresIn: '1h' });
+      if (!token) return null;
+
+      account.token = token;
+      return account;
+    },
+    signUp: async (root, args, { models }) => {
+      const { login, email, name, password } = args;
+      console.log(args);
+      let account = null;
+
+      account = await models.Account.findOne({
+        where: { login }
+      });
+
+      if (account) {
+        throw new UserInputError(LOGIN_EXIST);
+      }
+
+      account = await models.Account.findOne({
+        where: { email }
+      });
+
+      if (account) {
+        throw new UserInputError(EMAIL_EXIST);
+      }
+
+      account = await models.Account.create({
+        login,
+        email,
+        name,
+        password: md5(password)
+      })
 
       const token = await jwt.sign({ account }, SECRET_KEY, { expiresIn: '1h' });
       if (!token) return null;

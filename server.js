@@ -19,7 +19,7 @@ app.get('*', (req, res) => res.send({
 }));
 
 const corsOptions = {
-  origin: 'http://localhost:3000',
+  origin: 'https://ls-p.me',
   credentials: true
 };
 

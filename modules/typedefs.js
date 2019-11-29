@@ -13,17 +13,24 @@ module.exports = gql`
       login: String!
       password: String!
     ): Account
+    signUp(
+      login: String!
+      email: String!
+      name: String
+      password: String!
+    ): Account
   }
 
   type Account {
     id: Int
     chars: [Char]
     candidates: [Candidate]
+    password: String
+    name: String
     admin: Admin
     login: String
     token: String
     email: String
-    datereg: String
     lastseen: String
   }
   
